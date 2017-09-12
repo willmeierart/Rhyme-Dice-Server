@@ -11,8 +11,10 @@ router.get('/:sound', function(req, res, next) {
         numbers.push(Math.floor(Math.random()*wds.length))
       }
       const randomSet = numbers.map(num=>wds[num].word)
-      return res.json(randomSet)
+      return res.json({[req.params.sound]:randomSet})
     })
 })
 
 module.exports = router
+
+// {[wds[num].sound]:wds[num].word}
