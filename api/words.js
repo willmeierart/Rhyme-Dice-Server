@@ -10,8 +10,8 @@ router.get('/:sound', function(req, res, next) {
       for (let i=0; i<count; i++){
         numbers.push(Math.floor(Math.random()*wds.length))
       }
-      const randomSet = numbers.map(num=>wds[num].word)
-      return res.json({[req.params.sound]:randomSet})
+      const randomSet = numbers.map(num=>({[req.params.sound] : wds[num].word}))
+      return res.json({"word":randomSet})
     })
 })
 
