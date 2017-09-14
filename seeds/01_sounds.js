@@ -1,5 +1,5 @@
 exports.seed = function(knex, Promise) {
-  return knex('sounds').del()
+  return knex.raw('TRUNCATE sounds RESTART IDENTITY CASCADE;')
     .then(function () {
       return knex('sounds').insert([
         {sound: 'a'},
@@ -15,6 +15,7 @@ exports.seed = function(knex, Promise) {
         {sound: 'ie'},
         {sound: 'o'},
         {sound: 'oh'},
+        {sound: 'oo'},
         {sound: 'or'},
         {sound: 'oy'},
         {sound: 'uh'},

@@ -11,14 +11,15 @@ const i = require('../data/sounds/i')
 const ie = require('../data/sounds/ie')
 const o = require('../data/sounds/o')
 const oh = require('../data/sounds/oh')
+const oo = require('../data/sounds/oo')
 const or = require('../data/sounds/or')
 const oy = require('../data/sounds/oy')
 const uh = require('../data/sounds/uh')
 const ure = require('../data/sounds/ure')
 
-const sounds = ['a', 'ah', 'air', 'ar', 'ay', 'ee', 'eer', 'eh', 'er', 'i', 'ie', 'o', 'oh', 'or', 'oy', 'uh', 'ure']
+const sounds = ['a', 'ah', 'air', 'ar', 'ay', 'ee', 'eer', 'eh', 'er', 'i', 'ie', 'o', 'oo', 'oh', 'or', 'oy', 'uh', 'ure']
 
-const soundCollections = [a, ah, air, ar, ay, ee, eer, eh, er, i, ie, o, oh, or, oy, uh, ure].map((collection, i)=>{
+const soundCollections = [a, ah, air, ar, ay, ee, eer, eh, er, i, ie, oh, oo, o, or, oy, uh, ure].map((collection, i)=>{
   return collection.map((word)=>{
     return {word:word.word, sound:sounds[i]}
   })
@@ -26,7 +27,7 @@ const soundCollections = [a, ah, air, ar, ay, ee, eer, eh, er, i, ie, o, oh, or,
 const masterList = [].concat.apply([], soundCollections)
 
 exports.seed = function(knex, Promise) {
-  return knex('words').del()
+  return knex.raw('TRUNCATE words RESTART IDENTITY CASCADE;')
     .then(function () {
       return knex('words').insert(masterList);
     });
