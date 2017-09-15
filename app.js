@@ -1,11 +1,14 @@
 const express = require('express')
+const app = express()
 const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const dotenv = require('dotenv').config()
 const words = require('./api/words')
+const rhymes = require('./api/rhymes')
 // const users = require('./api/users')
-const app = express()
+
 
 app.use(cors({
   credentials: true,
@@ -18,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use('/words', words)
+app.use('/rhymes', rhymes)
 // app.use('/users', users)
 
 app.use(function(req, res, next) {

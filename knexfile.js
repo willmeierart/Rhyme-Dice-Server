@@ -1,5 +1,6 @@
-module.exports = {
+const dotenv = require('dotenv').config()
 
+module.exports = {
   development: {
     client: 'pg',
     connection: 'postgres://localhost/rhyme_dice'
@@ -8,5 +9,4 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL + '?ssl=true'
   }
-
-};
+}
