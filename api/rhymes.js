@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const dotenv = require('dotenv').config()
 const queries = require('../db/queries')
-
 const aws = require('aws-sdk')
 const S3_BUCKET  = process.env.S3_BUCKET
 
