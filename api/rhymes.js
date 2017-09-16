@@ -38,7 +38,7 @@ router.post('/signed', (req,res,next)=>{
 })
 
 router.get('/', (req,res,next)=>{
-
+ req
 })
 
 module.exports = router
