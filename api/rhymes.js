@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const dotenv = require('dotenv').config()
 const queries = require('../db/queries')
+const axios = require('axios')
 const aws = require('aws-sdk')
 const S3_BUCKET  = process.env.S3_BUCKET
 
@@ -27,6 +28,12 @@ router.get('/sign-s3', (req, res)=>{
     }
     res.write(JSON.stringify(returnData))
     res.end()
+  })
+})
+router.post('/signed', (req,res,next)=>{
+  console.log(req.body);
+  axios.put(req.body.url, req.body.file).then(res=>{
+    console.log(res.json);
   })
 })
 
