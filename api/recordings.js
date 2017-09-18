@@ -30,7 +30,7 @@ router.get('/:id', (req,res,next)=>{
 router.get('/my/:id', (req,res,next)=>{
   MyRecordings
     .query()
-    .eager('recordings')
+    // .eager('recordings')
     .where('id', req.params.id)
     .then(recordings=>{
       res.json(recordings)
