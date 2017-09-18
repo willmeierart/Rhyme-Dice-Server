@@ -18,17 +18,15 @@ router.get('/', (req,res,next)=>{
       res.json(recordings)
     })
 })
-router.post('/', (req,res,next)=>{
-
+router.get('/:id', (req,res,next)=>{
+  // queries.getRecordings()
+  Recording
+    .query()
+    .where('id', req.params.id)
+    .then(recordings=>{
+      res.json(recordings)
+    })
 })
-
-// router.post('/', (req,res,next)=>{
-//
-// })
-// router.put('/:name', (req,res,next)=>{
-//
-// })
-
 router.get('/my/:id', (req,res,next)=>{
   MyRecordings
     .query()
@@ -46,7 +44,7 @@ router.get('/tagged/:id', (req,res,next)=>{
       res.json(recordings)
     })
 })
-router.put('/rec/:id', (req,res,next)=>{
+router.put('/:id', (req,res,next)=>{
   let updateObj = {}
   if (req.params.url) {
     updateObj.url = req.params.url
@@ -55,7 +53,6 @@ router.put('/rec/:id', (req,res,next)=>{
   if (req.params.title) {
     updateObj.title = req.params.title
   }
-
   Recording
     .query()
     .patch(updateObj)
@@ -85,6 +82,18 @@ router.delete('/rec/:id', (req,res,next)=>{
       res.json(req.params.id, 'deleted')
     })
 })
+
+
+// router.post('/', (req,res,next)=>{
+//
+// })
+
+// router.post('/', (req,res,next)=>{
+//
+// })
+// router.put('/:name', (req,res,next)=>{
+//
+// })
 
 // router.get('/sign-s3', (req, res)=>{
 //   const s3 = new aws.S3()
