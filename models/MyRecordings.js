@@ -1,18 +1,22 @@
 const { Model } = require('objection')
+// const Recording = require('./Recording')
 
 class MyRecordings extends Model {
   static get tableName(){
     return 'userz'
   }
-  static relationMappings = {
-    genres: {
-      relation: Model.HasManyRelation,
-      modelClass: MyRecordings,
-      join: {
-        from: 'userz.id',
-        to: 'recordings.creator_id'
+  static get relationMappings(){
+    return {
+      genres: {
+        relation: Model.HasManyRelation,
+        modelClass: MyRecordings,
+        join: {
+          from: 'userz.id',
+          to: 'recordings.creator_id'
+        }
       }
     }
+
   }
 }
 
