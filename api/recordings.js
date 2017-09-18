@@ -6,8 +6,7 @@ const axios = require('axios')
 const aws = require('aws-sdk')
 const S3_BUCKET  = process.env.S3_BUCKET
 const Recording = require('../models/Recording')
-const MyRecordings = require('../models/MyRecordings')
-const TaggedRecordings = require('../models/TaggedRecordings')
+const User = require('../models/User')
 
 
 router.get('/', (req,res,next)=>{
@@ -23,23 +22,26 @@ router.get('/:id', (req,res,next)=>{
   Recording
     .query()
     .where('id', req.params.id)
+    .eager('friends_tagged_in')
     .then(recordings=>{
       res.json(recordings)
     })
 })
 router.get('/my/:id', (req,res,next)=>{
-  MyRecordings
+  User
     .query()
-    // .eager('recordings')
     .where('id', req.params.id)
+    .eager('my_recordings')
     .then(recordings=>{
+      console.log(recordings);
       res.json(recordings)
     })
 })
 router.get('/tagged/:id', (req,res,next)=>{
-  Recording
+  User
     .query()
-    .eager('recordings')
+    .where('id', req.params.id)
+    .eager('tagged_recordings')
     .then(recordings=>{
       res.json(recordings)
     })

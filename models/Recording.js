@@ -6,9 +6,9 @@ class Recording extends Model {
   }
   static get relationMappings() {
     return {
-      userz: {
-        relation: Model.HasManyRelation,
-        modelClass: Recording,
+      friends_tagged_in: {
+        relation: Model.ManyToManyRelation,
+        modelClass: __dirname+'/User',
         join: {
           from: 'recordings.id',
           through: {
