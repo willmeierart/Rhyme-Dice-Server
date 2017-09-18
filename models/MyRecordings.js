@@ -7,7 +7,7 @@ class MyRecordings extends Model {
   }
   static get relationMappings(){
     return {
-      genres: {
+      recordings: {
         relation: Model.HasManyRelation,
         modelClass: MyRecordings,
         join: {

@@ -6,7 +6,7 @@ class TaggedRecordings extends Model {
   }
   static get relationMappings(){
     return {
-      genres: {
+      recordings: {
         relation: Model.HasManyRelation,
         modelClass: TaggedRecordings,
         join: {

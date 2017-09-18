@@ -6,7 +6,7 @@ class Recording extends Model {
   }
   static get relationMappings() {
     return {
-      genres: {
+      friends: {
         relation: Model.HasManyRelation,
         modelClass: Recording,
         join: {
@@ -15,7 +15,7 @@ class Recording extends Model {
             from: 'friends_tagged.recording_id',
             to: 'friends_tagged.friend_id'
           },
-          to: 'friendz.id'
+          to: 'friends.id'
         }
       }
     }
