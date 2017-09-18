@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const dotenv = require('dotenv').config()
 const words = require('./api/words')
-const rhymes = require('./api/rhymes')
+const recordings = require('./api/recordings')
 // const users = require('./api/users')
 
 
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use('/words', words)
-app.use('/rhymes', rhymes)
+app.use('/recordings', recordings)
 // app.use('/users', users)
 
 app.use(function(req, res, next) {

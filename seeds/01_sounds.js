@@ -20,6 +20,6 @@ exports.seed = function(knex, Promise) {
         {sound: 'oy'},
         {sound: 'uh'},
         {sound: 'ure'}
-      ]);
-    });
-};
+      ])
+    })
+}
