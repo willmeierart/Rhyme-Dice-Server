@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const dotenv = require('dotenv').config()
+const knex = require('../db/knex')
 const queries = require('../db/queries')
 const axios = require('axios')
 const aws = require('aws-sdk')
@@ -70,24 +71,26 @@ router.post('/rec', (req,res,next)=>{
   }
   Recording
     .query()
-    .upsertgraph({
-      friends_tagged: [
-        // {
-        //   // recording_id: ?????,
-        //   user_id: req.body.creator_id,
-        //   friend_id: req.body.tagged_friend_id
-        // }
-      ],
-      recordings: {
-        url:req.body.url,
-        title:req.body.title,
-        time:req.body.length,
-        creator_id:req.body.creator_id,
-        favorite:req.body.favorite
-      }
+    // .upsertGraph(req.body, options)
+    .upsertGraph({
+      url:req.body.url,
+      title:req.body.title,
+      time:req.body.time,
+      creator_id:req.body.creator_id,
+      favorite:req.body.favorite
     }, options)
     .then(recording=>{
-      res.json(recording)
+      let friends_tagged = req.body.friends_tagged_in
+        .map(friend=>{
+          return {
+            recording_id: recording.id,
+            user_id: req.body.creator_id,
+            friend_id: friend.id
+          }
+        })
+      return knex('friends_tagged').insert(friends_tagged)
+      .then(response=>res.json(response))
+
     })
 })
 router.delete('/rec/:id', (req,res,next)=>{
