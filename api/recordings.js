@@ -70,7 +70,22 @@ router.post('/rec', (req,res,next)=>{
   }
   Recording
     .query()
-    .upsertgraph(req.body, options)
+    .upsertgraph({
+      friends_tagged: [
+        // {
+        //   // recording_id: ?????,
+        //   user_id: req.body.creator_id,
+        //   friend_id: req.body.tagged_friend_id
+        // }
+      ],
+      recordings: {
+        url:req.body.url,
+        title:req.body.title,
+        time:req.body.length,
+        creator_id:req.body.creator_id,
+        favorite:req.body.favorite
+      }
+    }, options)
     .then(recording=>{
       res.json(recording)
     })
@@ -84,41 +99,5 @@ router.delete('/rec/:id', (req,res,next)=>{
       res.json(req.params.id, 'deleted')
     })
 })
-
-
-// router.post('/', (req,res,next)=>{
-//
-// })
-
-// router.post('/', (req,res,next)=>{
-//
-// })
-// router.put('/:name', (req,res,next)=>{
-//
-// })
-
-// router.get('/sign-s3', (req, res)=>{
-//   const s3 = new aws.S3()
-//   const fileName = req.query['filename']
-//   const s3Params = {
-//     Bucket: S3_BUCKET,
-//     Key: fileName,
-//     Expires: 60,
-//     ACL: 'public-read'
-//   }
-//   s3.getSignedUrl('putObject', s3Params, (err, data)=>{
-//     if (err) {
-//       console.log(err)
-//       return res.end()
-//     }
-//     const returnData = {
-//       signedRequest: data,
-//       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-//     }
-//     res.write(JSON.stringify(returnData))
-//     res.end()
-//   })
-// })
-
 
 module.exports = router
