@@ -91,7 +91,6 @@ router.post('/rec', (req,res,next)=>{
         })
       return knex('friends_tagged').insert(friends_tagged)
       .then(response=>res.json(response))
-
     })
 })
 router.delete('/rec/:id', (req,res,next)=>{
@@ -103,5 +102,11 @@ router.delete('/rec/:id', (req,res,next)=>{
       res.json(req.params.id, 'deleted')
     })
 })
+
+router.post('/tag', (req,res,next)=>{
+  return knex('friends_tagged').insert(req.body)
+  .then(response=>res.json(response))
+})
+
 
 module.exports = router
